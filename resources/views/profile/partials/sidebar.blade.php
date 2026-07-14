@@ -1,0 +1,72 @@
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col p-md z-40 hidden md:flex">
+    <div class="mb-xl px-sm">
+        <h1 class="font-headline-sm text-headline-sm font-black text-primary">Tukar Jasa</h1>
+    </div>
+
+    {{-- User Info --}}
+    <div class="flex items-center gap-md p-md mb-xl bg-surface-container rounded-xl">
+        <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary text-lg">
+            {{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}
+        </div>
+        <div class="overflow-hidden">
+            <p class="font-label-md text-label-md text-on-surface truncate">{{ Auth::user()->nama }}</p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Member &bull; {{ Auth::user()->poin }} pts</p>
+        </div>
+    </div>
+
+    <a href="{{ route('user.jasa.create') }}"
+       class="primary-gradient text-white font-label-md py-md px-lg rounded-xl mb-xl transition-transform active:scale-95 flex items-center justify-center gap-sm">
+        <span class="material-symbols-outlined text-[20px]">add_circle</span>
+        Post a Service
+    </a>
+
+    <nav class="flex-1 space-y-base">
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('user.dashboard') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('user.dashboard') }}">
+            <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('user.transaksi.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('user.transaksi.index') }}">
+            <span class="material-symbols-outlined">swap_horiz</span> My Exchanges
+        </a>
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('user.jasa.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('user.jasa.index') }}">
+            <span class="material-symbols-outlined">design_services</span> Jasa Saya
+        </a>
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('user.wallet.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('user.wallet.index') }}">
+            <span class="material-symbols-outlined">payments</span> Wallet
+        </a>
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('user.profil.show', Auth::id()) ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('user.profil.show', Auth::id()) }}">
+            <span class="material-symbols-outlined">person</span> Profil Publik
+        </a>
+        <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md transition-all
+            {{ request()->routeIs('profile.edit') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high' }}"
+           href="{{ route('profile.edit') }}">
+            <span class="material-symbols-outlined">settings</span> Settings
+        </a>
+    </nav>
+
+    <div class="mt-auto space-y-base pt-xl border-t border-outline-variant">
+        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg font-label-md transition-all"
+           href="{{ route('user.search') }}">
+            <span class="material-symbols-outlined">search</span> Pencarian
+        </a>
+        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg font-label-md transition-all"
+           href="{{ route('user.search') }}">
+            <span class="material-symbols-outlined">help</span> Help Center
+        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="w-full flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg font-label-md transition-all">
+                <span class="material-symbols-outlined">logout</span> Logout
+            </button>
+        </form>
+    </div>
+</aside>
